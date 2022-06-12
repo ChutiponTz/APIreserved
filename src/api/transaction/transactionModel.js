@@ -2,6 +2,7 @@ const { transactionSchema } = require('./transactionSchema')
 const mongoose = require('mongoose')
 const moment = require('moment')
 const ObjectId = mongoose.Types.ObjectId
+const dayjs = require('dayjs')
 
 class transactionModel {
     async insertTransaction(obj) {
@@ -16,7 +17,8 @@ class transactionModel {
 
     async getLastRecord(storeId, reservedTime){
         try {
-            const lastestTransaction = await transactionSchema.findOne({ storeId: ObjectId(storeId) , reservedTime: reservedTime }).sort({ _id: -1 })
+            const lastestTransaction = await transactionSchema.findOne({ storeId: ObjectId(storeId) , reservedTime: reservedTime , 
+                                                                          reservedDate: dayjs().format('YYYY-MM-DD') }).sort({ _id: -1 })
             return lastestTransaction ;
         } catch (error) {
             console.error(error);
@@ -29,7 +31,8 @@ class transactionModel {
             const pipeline = [
                 {
                   '$match': {
-                    'storeId': ObjectId(storeId)
+                    'storeId': ObjectId(storeId),
+                    'reservedDate': dayjs().format('YYYY-MM-DD').toString()
                   }
                 }, {
                   '$group': {

@@ -11,6 +11,7 @@ const transactionSchema = mongoose.Schema({
     currentQty: Number,
     type: String,
     reservedTime : String,
+    reservedDate : String,
     createdDate: {
         type: Date,
         required: true,
