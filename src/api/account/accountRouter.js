@@ -20,9 +20,9 @@ accountRouter.get('/getInfo',
     accountController.getInfo
 )
 
-accountRouter.post('/getCheckAccount',
-    validate_token(),
-    accountController.getCheckAccount
-)
+// accountRouter.post('/getCheckAccount',
+//     validate_token(),
+//     accountController.getCheckAccount
+// )
 
 module.exports = accountRouter

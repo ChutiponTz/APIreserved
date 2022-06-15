@@ -61,24 +61,24 @@ class accountController {
         }
     }
 
-    async getCheckAccount(req, res) {
-        try {
-            const { refAccount } = req.body
-            let account
-            if (refAccount.length == 24) {
-                account = (await accountModel.findOneAccount({ _id: refAccount })).account
-            } else {
-                account = (await accountModel.findOneAccount({ username: refAccount })).account
-            }
-            if (!account) {
-                return failed(res, 'username หรือ เลขบัญชีผู้รับไม่ถูกต้อง')
-            }
-            return success(res, "ดึงข้อมูลผู้ใช้สำเร็จ", { account: account ? account : accountUsername })
-        } catch (error) {
-            debug(error)
-            return failed(res, 'found some issue on action')
-        }
-    }
+    // async getCheckAccount(req, res) {
+    //     try {
+    //         const { refAccount } = req.body
+    //         let account
+    //         if (refAccount.length == 24) {
+    //             account = (await accountModel.findOneAccount({ _id: refAccount })).account
+    //         } else {
+    //             account = (await accountModel.findOneAccount({ username: refAccount })).account
+    //         }
+    //         if (!account) {
+    //             return failed(res, 'username หรือ เลขบัญชีผู้รับไม่ถูกต้อง')
+    //         }
+    //         return success(res, "ดึงข้อมูลผู้ใช้สำเร็จ", { account: account ? account : accountUsername })
+    //     } catch (error) {
+    //         debug(error)
+    //         return failed(res, 'found some issue on action')
+    //     }
+    // }
 
     async logout(req, res) {
         try {
